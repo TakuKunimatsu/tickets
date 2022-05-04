@@ -1,0 +1,7 @@
+textarea{
+  rows: 200;
+  height:60vh;
+  max-height: 60vh;
+  min-height: 60vh;
+  width: 600px;
+}
