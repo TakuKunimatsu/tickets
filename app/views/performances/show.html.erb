@@ -1,0 +1,71 @@
+<%= render "shared/header" %>
+
+<%# 公演の概要 %>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <%=image_tag "test.jpeg" ,class:"img-thumbnail" %>
+    </div>
+    <div class="col-md">
+      <%=image_tag "test.jpeg" ,class:"img-thumbnail" %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 text-center">
+    <%# if user_signed_in? && @item.order == nil %>
+      <%# if current_user.id == @item.user_id %>
+        <%= link_to "公演情報の編集", method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", method: :delete, class:"item-destroy" %>
+      <%# else %> 
+      
+      <%= link_to "購入画面に進む", class:"item-red-btn"%>
+      
+      <%# end %>
+    <%# end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 text-center center-block">
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 text-center">
+          前売3000円
+        </div>
+      </div>
+      <div class = "mx-auto" style="width: 600px;">
+        <table class="table table-borderless align-middle">
+          <tbody>
+            <tr>
+              <th scope="row">劇場</th>
+              <td class="text-center"><%= "シアター風姿花伝" %></td>
+            </tr>
+            <tr>
+              <th class="detail-item">日程</th>
+              <td class="detail-value"><%=  %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class = "mx-auto" style="width: 600px; height: 400px;">
+        説明文
+      </div>
+  </div> 
+</div>
+  <%# /公演の概要 %>
+
+<div class="container">
+  <div class = "mx-auto" style="width: 600px;">
+    <div class="col-xs-6 col-xs-offset-3 text-center">
+      <div class="input-group">
+        <span class="input-group-text">review</span>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div>
+      <button type="button" class="btn btn-secondary btn-lg">submit</button>
+    </div>
+  </div>
+</div>
+
