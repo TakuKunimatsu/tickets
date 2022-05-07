@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  get 'performances/index'
-  root to: "performances#new"
+  devise_for :users
+  root to: "performances#index"
+  resources :performances
 end
