@@ -6,3 +6,10 @@ class AdminUser < ApplicationRecord
 
          validates :company_name, presence: true
 end
+
+class AdminUser::ParameterSanitizer < Devise::ParameterSanitizer
+  def initialize(*)
+    super
+    permit(:sign_up, keys: [:company_name])
+  end
+end
