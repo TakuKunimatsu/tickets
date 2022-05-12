@@ -5,31 +5,48 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <% if user_signed_in? %>
-          <li class="nav-item">
-            <li class="nav-link"><%= link_to current_user.name, "#", class: "nav-link active" %></li>
-          </li>
-          <li class="nav-item">
-            <li class="nav-link"><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link active" %></li>
-          </li>
+        <% if admin_user_signed_in? %>
+          <span class='text-white'> Administrator mode </span>
         <% else %>
-          <li class="nav-item">
-            <li class="nav-link"><%= link_to 'Sign in', new_user_session_path, class: "nav-link active" %></li>
-          </li>
-          <li class="nav-item">
-            <li class="nav-link"><%= link_to 'Sigh up', new_user_registration_path, class: "nav-link active" %></li>
-          </li>
-        <% end %>  
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <li class="nav-link"><%= link_to current_user.name, "#", class: "nav-link active" %></li>
+            </li>
+            <li class="nav-item">
+              <li class="nav-link"><%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "nav-link active" %></li>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <li class="nav-link"><%= link_to 'Sign in', new_user_session_path, class: "nav-link active" %></li>
+            </li>
+            <li class="nav-item">
+              <li class="nav-link"><%= link_to 'Sigh up', new_user_registration_path, class: "nav-link active" %></li>
+            </li>
+          <% end %>
+        <% end %>    
       </ul>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Company menu
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Company Sign in</a></li>
-          <li><a class="dropdown-item" href="#"> Company Sign up</a></li>
-        </ul>
-      </div>
+      <% if admin_user_signed_in? %>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle bg-dark" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Company menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li class="dropdown-item nav-link"><%= link_to current_admin_user.company_name, "#", class: "nav-link active text-white" %></li>
+            <li class="dropdown-item nav-link"><%= link_to 'Exhabit', "#", class: "nav-link active text-white" %></li>
+            <li class="dropdown-item nav-link"><%= link_to 'Sign out', destroy_admin_user_session_path, method: :delete, class: "nav-link active text-white" %></li>
+          </ul>
+        </div>
+      <% else %>  
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle bg-dark" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Company menu
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <li class="dropdown-item nav-link"><%= link_to 'Company Sign in', new_admin_user_session_path, class: "nav-link active text-white" %></li>
+            <li class="dropdown-item nav-link"><%= link_to 'Company Sign up', new_admin_user_registration_path, class: "nav-link active text-white" %></li>
+          </ul>
+        </div>
+      <% end %>  
     </div>
   </div>
   </nav>
