@@ -32,7 +32,7 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
             <li class="dropdown-item nav-link"><%= link_to current_admin_user.company_name, "#", class: "nav-link active text-white" %></li>
-            <li class="dropdown-item nav-link"><%= link_to 'Exhabit', "#", class: "nav-link active text-white" %></li>
+            <li class="dropdown-item nav-link"><%= link_to 'Exhabit', new_performance_path, class: "nav-link active text-white" %></li>
             <li class="dropdown-item nav-link"><%= link_to 'Sign out', destroy_admin_user_session_path, method: :delete, class: "nav-link active text-white" %></li>
           </ul>
         </div>
