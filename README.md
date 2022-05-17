@@ -47,7 +47,7 @@
 - belongs_to :admin_user
 - has_many   :comments
 - has_one    :order 
-- has_one    :schedule
+- has_many   :schedule
 
 
 ## schedules テーブル
