@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   }
 
   root to: "performances#index"
-  resources :performances
+  resources :performances, only: [:new, :create]
 end
