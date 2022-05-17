@@ -26,6 +26,6 @@ class Performance < ApplicationRecord
     self.start_day < self.end_day
   end
 
-
+  has_many :schedules
   belongs_to :admin_user
 end
