@@ -12,5 +12,8 @@ Rails.application.routes.draw do
   }
 
   root to: "performances#index"
-  resources :performances, only: [:new, :create]
+  resources :performances, only: [:new, :create] do
+    resources :schedules, only: [:new,:create]
+  end
+  
 end
