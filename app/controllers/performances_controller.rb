@@ -1,11 +1,12 @@
 class PerformancesController < ApplicationController
   before_action :authenticate_admin_user!, except: [:index]
 
-  #def index
-  #end
+  def index
+    @performances = Performance.all.order('created_at DESC')
+  end
 
   def new
-    @performance= Performance.new
+    @performance = Performance.new
   end
 
   def create
