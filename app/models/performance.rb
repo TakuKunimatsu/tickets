@@ -21,7 +21,7 @@ class Performance < ApplicationRecord
 
   def date_before_last
     return if last_day.blank? || start_day.blank?
-    errors.add(:last_day, "は開始日以降のものを選択してください") if last_day < start_day
+    errors.add(:last_day, "は初日以降のものを選択してください") if last_day < start_day
   end
 
 end
