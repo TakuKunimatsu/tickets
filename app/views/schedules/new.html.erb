@@ -1,0 +1,42 @@
+ <%= render "shared/header" %>
+ 
+ <%# 公演の登録 %>
+ <%= form_with model: @form, url: performance_schedules_path, local: true do |f| %>
+
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3"> 
+    <table class="table">
+    <thead>
+      <tr>
+        <th width="60px">登録</th>
+        <th>公演日</th>
+        <th>公演時間</th>
+        <th>座席数</th>
+      </tr>
+    </thead>
+    <tbody class="bulk-registration-form">
+    <%= f.fields_for :schedules do |f| %>
+      <tr class="item">
+        <td class="text-center">
+          <%= f.check_box :register, class: 'top10 registration-checkbox' %>
+        </td>
+        <td>
+          <%= f.date_field :performance_day, class: 'form-control' %>
+        </td>
+        <td>
+          <%= f.time_field :performance_time, class: 'form-control' %>
+        </td>
+        <td>
+          <%= f.number_field :stock, class: 'form-control' %>
+        </td>
+      </tr>
+       <% end %>
+    </tbody>
+    </table>
+    <div class="text-center">
+    <%= f.submit '公演を登録する', class: 'btn btn-primary' %>
+    </div>
+    <% end %>
+    </div>  
+    </div>
+      <%# /公演の登録 %>
