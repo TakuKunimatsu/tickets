@@ -35,6 +35,8 @@
 | ------------------ | ---------- | ------------------------------ |
 | name               | string     | null: false                    |
 | theater            | string     | null: false                    |
+| start_day          | date       | null: false                    |
+| last_day           | date       | null: false                    |
 | info               | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | admin_user         | references | null: false, foreign_key: true |
@@ -45,17 +47,16 @@
 - belongs_to :admin_user
 - has_many   :comments
 - has_one    :order 
-- has_one    :date
+- has_many   :schedule
 
 
-## dates テーブル
+## schedules テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| date               | string     | null: false                    |
-| time               | string     | null: false                    |
+| performance_day    | date       | null: false                    |
+| performance_time   | time       | null: false                    |
 | stock              | integer    | null: false                    |
-| order              | references | null: false, foreign_key: true |
 | performance        | references | null: false, foreign_key: true |
 
 
@@ -71,13 +72,14 @@
 | ------------------ | ---------- | ------------------------------ |
 | performance        | references | null: false, foreign_key: true |
 | user               | references | null: false, foreign_key: true |
+| schedule           | references | null: false, foreign_key: true |
 | buy_count          | integer    | null: false                    |
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :date
+- belongs_to :schedule
 - belongs_to :performance
 
 
