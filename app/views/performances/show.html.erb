@@ -4,10 +4,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md">
-      <%=image_tag "test.jpeg" ,class:"img-thumbnail" %>
-    </div>
-    <div class="col-md">
-      <%=image_tag "test.jpeg" ,class:"img-thumbnail" %>
+      <%= image_tag @performance.image ,class:"img-thumbnail" %>
     </div>
   </div>
 </div>
@@ -15,50 +12,104 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3 text-center">
-    <%# if user_signed_in? && @item.order == nil %>
-      <%# if current_user.id == @item.user_id %>
-        <%= link_to "公演情報の編集", method: :get, class: "item-red-btn" %>
-        <p class="or-text">or</p>
-        <%= link_to "削除", method: :delete, class:"item-destroy" %>
-      <%# else %> 
+    <% if admin_user_signed_in? %>
+      <% if current_admin_user.id == @performance.admin_user_id %>
+        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "公演情報の編集", method: :get %></button>
+        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "削除", method: :delete, class:"btn btn-secondary" %></button>
+      <% else %> 
       
-      <%= link_to "購入画面に進む", class:"item-red-btn"%>
+      <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "購入画面に進む", class:"item-red-btn"%></button>
       
-      <%# end %>
-    <%# end %>
+      <% end %>
+    <% end %>
     </div>
   </div>
 
   <div class="row">
     <div class="col-xs-6 col-xs-offset-3 text-center center-block">
-      <div class="row">
-        <div class="col-xs-6 col-xs-offset-3 text-center">
-          前売3000円
-        </div>
-      </div>
-      <div class = "mx-auto" style="width: 600px;">
-        <table class="table table-borderless align-middle">
+      <div class = "mx-auto" style="width: 50%;">
+        <table class="table table-sm table-borderless align-middle">
           <tbody>
             <tr>
-              <th scope="row">劇場</th>
-              <td class="text-center"><%= "シアター風姿花伝" %></td>
+              <th scope="row"><p class="fs-2">タイトル</p></th>
+              <td class="text-center"><p class="fs-2"><%= @performance.name %></p></td>
             </tr>
             <tr>
-              <th class="detail-item">日程</th>
-              <td class="detail-value"><%=  %></td>
+              <th scope="row"><p class="fs-2">劇場</p></th>
+              <td class="text-center"><p class="fs-2"><%= @performance.theater %></p></td>
+            </tr>
+            <tr>
+              <th scope="row"><p class="fs-2">日程</p></th>
+              <td class="text-center"><p class="fs-2"><%= @performance.start_day %>〜<%= @performance.last_day %></p></td>
+            </tr>
+            <tr>
+              <th scope="row"><p class="fs-2">価格</p></th>
+              <td class="text-center"><p class="fs-2">前売り<%= @performance.price %>円</p></td>
+            </tr>
+            <tr>
+              <th scope="row"><p class="fs-2">公演概要</p></th>
+              <td class="text-center"><p class="fs-2"><%= @performance.info %></p></td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class = "mx-auto" style="width: 600px; height: 400px;">
-        説明文
-      </div>
   </div> 
 </div>
   <%# /公演の概要 %>
 
+<%# 公演の登録 %>
+<% if admin_user_signed_in? %>
+  <% if current_admin_user.id == @performance.admin_user_id %>
+    <div class="container">
+    <%= form_with model: [@performance, @schedule], local: true do |f| %>
+
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 mx-auto" style="width: 50%;"> 
+        <table class="table">
+          <thead>
+            <tr>
+              <th>公演日</th>
+              <th>公演時間</th>
+              <th>座席数</th>
+            </tr>
+          </thead>
+          <tbody class="bulk-registration-form">
+            <tr class="item">
+              <td>
+                <%= f.date_field :performance_day, class: 'form-control' %>
+              </td>
+              <td>
+                <%= f.time_field :performance_time, class: 'form-control' %>
+              </td>
+              <td>
+                <%= f.number_field :stock, class: 'form-control' %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-center">
+          <%= f.submit '公演を登録する', class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>
+      <%# /公演の登録 %>
+    <div class= 'row'>
+      <div class="mx-auto" style="width: 50%;">
+      <h4>＜公演一覧＞</h4>
+      <% @schedules.each do |schedule| %>
+        <p class="fs-4">
+          <%= schedule.performance_day %>:<%= schedule.performance_time.strftime('%k:%M') %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+  <%#  レビュー機能%>
+<% if user_signed_in? %>
 <div class="container">
-  <div class = "mx-auto" style="width: 600px;">
+  <div class = "row mx-auto" style="width: 50%;">
     <div class="col-xs-6 col-xs-offset-3 text-center">
       <div class="input-group">
         <span class="input-group-text">review</span>
@@ -68,4 +119,5 @@
     </div>
   </div>
 </div>
-
+<% end %>
+<%# /レビュー機能%>

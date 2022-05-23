@@ -17,9 +17,6 @@
     <tbody class="bulk-registration-form">
     <%= f.fields_for :schedules do |f| %>
       <tr class="item">
-        <td class="text-center">
-          <%= f.check_box :register, class: 'top10 registration-checkbox' %>
-        </td>
         <td>
           <%= f.date_field :performance_day, class: 'form-control' %>
         </td>
