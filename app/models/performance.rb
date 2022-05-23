@@ -24,4 +24,11 @@ class Performance < ApplicationRecord
     errors.add(:last_day, "は初日以降のものを選択してください") if last_day < start_day
   end
 
+  def self.search(search)
+    if search != ""
+      Performance.where('name LIKE(?)', "%#{search}%")
+    else
+      Performance.all
+    end
+  end
 end
