@@ -21,6 +21,8 @@ class PerformancesController < ApplicationController
 
   def show
     @performance = Performance.find(params[:id])
+    @schedule = Schedule.new
+    @schedules = @performance.schedules
   end
 
   private

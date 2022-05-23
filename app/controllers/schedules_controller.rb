@@ -5,13 +5,8 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @schedule = Schedule.new(schedule_params)
-    if @schedule.valid? 
-      @schedule.save
-      redirect_to root_path
-    else
-      render :new
-    end
+    @schedule = Schedule.create(schedule_params)
+    redirect_to "/performances/#{@schedule.performance.id}"  # コメントと結びつくツイートの詳細画面に遷移する
   end
 
   private
