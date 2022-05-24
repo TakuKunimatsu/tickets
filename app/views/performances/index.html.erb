@@ -38,46 +38,25 @@
     <%= render "shared/header" %>
   
 <main>
-
-  <form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
-  
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      <% @performances.each do |performance| %>
-        <div class="col">
-          <div class="card shadow-sm">  
-            <%= image_tag performance.image %>
-            <div class="card-body">
-              <p class="card-text">団体名：<%= performance.admin_user.company_name %></p>
-              <p class="card-text">公演名：<%= performance.name %></p>
-              <p class="card-text">劇場：<%= performance.theater %></p>
-              <p class="card-text">日程：<%= performance.start_day %>〜<%= performance.last_day %></p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <% if admin_user_signed_in? %>
-                    <% if current_admin_user.id == @performance.admin_user_id %>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    <% end %>
-                  <% end %>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %> 
-      </div>
+<div class="container">
+  <div class="row float-end">
+    <div class="col">
+      <%= form_with(url:  search_performances_path, local: true, method: :get, class: "search-form") do |form| %>
+      <%= form.text_field :keyword, placeholder: "公演を検索する", class: "search-input" %>
+      <%= form.submit "検索", class: "search-btn" %>
+      <% end %>
     </div>
-  </div>
+ </div>
+</div>
 
 </main>
-
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <%= performance_lists(@performances) %>
+      </div>  
+    </div>
+  </div>
 <footer class="text-muted py-5">
   <div class="container">
     <p class="float-end mb-1">

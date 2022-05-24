@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  before_action :authenticate_admin_user!, except: [:index]
+  before_action :authenticate_admin_user!, except: [:index, :show, :search]
 
   def index
     @performances = Performance.all.order('created_at DESC')
@@ -19,6 +19,15 @@ class PerformancesController < ApplicationController
     end
   end
 
+  def show
+    @performance = Performance.find(params[:id])
+    @schedule = Schedule.new
+    @schedules = @performance.schedules
+  end
+
+  def search
+    @performances = Performance.search(params[:keyword])
+  end
 
   private
 

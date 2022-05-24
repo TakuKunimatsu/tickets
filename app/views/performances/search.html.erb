@@ -1,0 +1,22 @@
+<%= render "shared/header" %>
+
+<div class="container">
+  <div class="row float-end">
+    <div class="col">
+      <%= form_with(url: search_performances_path, local: true, method: :get, class: "search-form") do |form| %>
+      <%= form.text_field :keyword, placeholder: "公演を検索する", class: "search-input" %>
+      <%= form.submit "検索", class: "search-btn" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+       <% @performances.each do |performance| %>
+         <%= render partial: "performance", locals: { performance: performance } %>
+       <% end %>
+    </div>
+  </div>
+</div>
