@@ -48,7 +48,7 @@
             </tr>
             <tr>
               <th scope="row"><p class="fs-2">公演概要</p></th>
-              <td class="text-center"><p class="fs-2"><%= @performance.info %></p></td>
+              <td class="text-center"><p class="fs-2"><%= safe_join(@performance.info.split("\n"),tag(:br)) %></p></td>
             </tr>
           </tbody>
         </table>
