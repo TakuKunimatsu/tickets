@@ -14,9 +14,9 @@
     <div class="col-xs-6 col-xs-offset-3 text-center">
     <% if admin_user_signed_in? %>
       <% if current_admin_user.id == @performance.admin_user_id %>
-        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "公演情報の編集", method: :get %></button>
+        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "公演情報の編集", edit_performance_path, method: :get %></button>
         <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "削除", method: :delete, class:"btn btn-secondary" %></button>
-      <% else %> 
+      <% elsif user_signed_in? %> 
       
       <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "購入画面に進む", class:"item-red-btn"%></button>
       
@@ -94,18 +94,29 @@
     </div>
   <% end %>
 <% end %>
-      <%# /公演の登録 %>
-    <div class= 'row'>
-      <div class="mx-auto" style="width: 50%;">
+<%# /公演の登録 %>
+
+    <div class= 'container'>
+      <div class="row mx-auto" style="width: 50%;">
       <h4>＜公演一覧＞</h4>
       <% @schedules.each do |schedule| %>
+      <%= form_with model: [@performance, schedule], local: true do |f| %>
         <p class="fs-4">
           <%= schedule.performance_day %>:<%= schedule.performance_time.strftime('%k:%M') %>
+          <% if admin_user_signed_in? %>
+            <% if current_admin_user.id == @performance.admin_user_id %>
+              <%= label_tag :start_of_sales , '販売開始'%>
+              <%= check_box_tag :start_of_sales, true, false  %>
+              <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "編集", edit_performance_schedule_path(@performance.id, schedule.id), method: :get %></button>
+              <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "削除", method: :delete, class:"btn btn-secondary" %></button>
+            <% end %>
+          <% end %>  
         </p>
       <% end %>
+      <% end %>
+      </div>
     </div>
-  </div>
-</div>
+
   <%#  レビュー機能%>
 <% if user_signed_in? %>
 <div class="container">
