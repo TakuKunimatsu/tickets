@@ -35,8 +35,8 @@ class PerformancesController < ApplicationController
 
   def show
     @performance = Performance.find(params[:id])
-    @schedule = Schedule.new
     @schedules = @performance.schedules
+    @schedule = Schedule.find(params[:id])
   end
 
   def search
