@@ -7,7 +7,7 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.create(schedule_params)
-    redirect_to "/performances/#{@schedule.performance.id}" 
+    redirect_to request.referer
   end
 
   def edit
