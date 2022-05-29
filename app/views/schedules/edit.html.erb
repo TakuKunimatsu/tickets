@@ -1,0 +1,41 @@
+ <%= render "shared/header" %>
+
+<div class= 'container'>
+  <div class="row mx-auto" style="width: 80%;">
+    <h4>＜編集する公演回＞</h4>
+    <div class="alert alert-info" role="alert">
+    販売を開始している公演回を編集する場合は注意してください
+    </div>
+    <%= form_with model:[@performance, @schedule],url: {controller: 'schedules', action: 'update' } do |f| %>
+    <p class="fs-4">
+      <%= @schedule.performance_day %>:<%= @schedule.performance_time.strftime('%k:%M') %>
+    </p>
+    <div class="col-xs-6 col-xs-offset-3"> 
+      <table class="table">
+        <thead>
+          <tr>
+            <th>公演日</th>
+            <th>公演時間</th>
+            <th>座席数</th>
+          </tr>
+        </thead>
+        <tbody class="bulk-registration-form">
+          <tr class="item">
+            <td>
+              <%= f.date_field :performance_day, class: 'form-control' %>
+            </td>
+            <td>
+              <%= f.time_field :performance_time, class: 'form-control' %>
+            </td>
+            <td>
+              <%= f.number_field :stock, class: 'form-control' %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+          <%= f.submit '公演を編集する', class: 'btn btn-primary' %>
+        </div>
+    <% end %>
+  </div>
+</div>  

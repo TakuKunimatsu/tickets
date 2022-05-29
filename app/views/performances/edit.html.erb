@@ -1,32 +1,40 @@
 <%= render "shared/header" %>
-  <div class="container">
-    <div class =  "mx-auto" style="width: 600px;">
-      <h2 class="text-center">公演の情報を入力</h2>
-      <%# form_with model: url:  local: true do |f| %>
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class ="col mx-auto">
+        <h2 class="text-center">公演の情報を編集</h2>
+      </div> 
+     
+<%= form_with model: @performance, url: performance_path, local: true do |f| %>
 
-      <%# 公演ビジュアル %>
-      <div class="row">
-        <div class="col-xs-6 col-xs-offset-3">
-          公演ビジュアル
+  <%= render 'shared/error_messages', model: f.object %>
+  
+        <%# 公演ビジュアル %>
+        <div class="row">
+          <div class="col-xs-6 col-xs-offset-3 mx-auto" style="width: 50%;">
+            公演ビジュアル<br>
+             <div id="previews"></div>
+            <%= f.file_field :image, name: 'performance[image]', id:"performance-image" %>
+          </div>  
         </div>
-          <%= file_field :image, id:"performance-image" %>
-        </div>
-      </div>
-      <%# /公演ビジュアル %>
-    </div>  
+        <%# /公演ビジュアル %>
       
 
     <%# 公演の概要 %>
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3 ">
-        <div class="form-group mx-auto" style="width: 600px;">
-          <%= label :thater, '劇場', class: 'form-control' %>
-          <%= text_field :theater,placeholder: "劇場名（必須）",size: "50", maxlength:"40"%>
-          <%= label :date, '日程', class: 'form-control' %>
-          <%= text_field :date, placeholder: " 日程（必須）", size: "50", maxlength:"40"%>
-          <%= label :info, '公演の概要', class: 'form-control' %>
-          <%= text_area :info, placeholder: "公演の概要（必須）", maxlength:"1000"%>
+        <div class="form-group mx-auto" style="width: 50%;">
+          <%= f.label :name, '公演名', class: 'form-control' %>
+          <%= f.text_field :name, placeholder: "公演名（必須）", maxlength:"40", class: 'form-control' %>
+          <%= f.label :thater, '劇場', class: 'form-control' %>
+          <%= f.text_field :theater, placeholder: "劇場名（必須）", maxlength:"40", class: 'form-control' %>
+          <%= f.label :date, '日程', class: 'form-control' %>
+          <%= f.date_field :start_day, placeholder: " 日程（必須）", class: 'form-control'%>
+          〜
+          <%= f.date_field :last_day, placeholder: " 日程（必須）", class: 'form-control'%>
+          <%= f.label :info, '公演の概要', class: 'form-control' %>
+          <%= f.text_area :info, placeholder: "公演の概要（必須）", maxlength:"1000", class: 'form-control'%>
         </div>
       </div>          
     </div>
@@ -36,23 +44,24 @@
       <%# 販売価格 %>
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3"> 
-        <div class="form-group mx-auto" style="width: 600px;">
-          <%= label :price, '価格', class: 'form-control' %>
-          <%= text_field :price, placeholder: " 価格（必須）", size: "50", maxlength:"40"%>
+        <div class="form-group mx-auto" style="width: 50%;">
+          <%= f.label :price, '価格', class: 'form-control' %>
+          <%= f.text_field :price, placeholder: " 価格（必須）", size: "50", maxlength:"40"%>
           円
         </div>
       </div>  
     </div>
       <%# /販売価格 %>
 
+
       <%# 下部ボタン %>
     <div class="row">
       <div class="col-xs-6 col-xs-offset-3"> 
-        <div class="form-group mx-auto" style="width: 600px;">
-        <%# submit "出品する" ,class:"sell-btn" %>
-        <%= link_to 'もどる', root_path, class:"back-btn" %>
+        <div class="form-group mx-auto" style="width: 50%;">
+        <%= f.submit "更新する" ,class:"sell-btn" %>
+        <%= link_to 'もどる', performance_path, class:"back-btn" %>
         </div>
       </div>
     </div>    
       <%# /下部ボタン %>  
-  </div>
+<% end %>  
