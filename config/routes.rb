@@ -18,5 +18,5 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
-  
+  resources :orders, only: [:index]
 end
