@@ -46,7 +46,7 @@
 
 - belongs_to :admin_user
 - has_many   :comments
-- has_one    :order 
+- has_many   :orders 
 - has_many   :schedule
 
 
@@ -63,7 +63,7 @@
 ### Association
 
 - belongs_to :performance
-- has_one    :order 
+- has_many   :orders 
 
 
 ## orders テーブル
