@@ -4,7 +4,7 @@
   <div class="row mx-auto" style="width: 80%;">
     <h4>＜編集する公演回＞</h4>
     <div class="alert alert-info" role="alert">
-    販売を開始している公演回を編集する場合は注意してください
+    販売を開始している公演回を編集、削除する場合は注意してください
     </div>
     <%= form_with model:[@performance, @schedule],url: {controller: 'schedules', action: 'update' } do |f| %>
     <p class="fs-4">
@@ -34,7 +34,8 @@
         </tbody>
       </table>
       <div class="text-center">
-          <%= f.submit '公演を編集する', class: 'btn btn-primary' %>
+          <%= f.submit '公演を編集する', class: 'btn btn-outline-dark' %>
+          <button type="button" class= "btn btn-lg"><%= link_to "公演を削除する", performance_schedule_path, method: :delete, class:"btn btn-outline-dark" %></button>
         </div>
     <% end %>
   </div>
