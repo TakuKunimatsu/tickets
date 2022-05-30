@@ -1,10 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_admin_user!
 
-  def new
-    @schedule = Schedule.new
-  end
-
   def create
     @schedule = Schedule.create(schedule_params)
     redirect_to request.referer
