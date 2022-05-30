@@ -11,7 +11,7 @@ class Performance < ApplicationRecord
   validate :date_before_last
 
   has_one_attached :image
-  has_many :schedules
+  has_many :schedules, dependent: :destroy
   belongs_to :admin_user
 
   def date_before_start
