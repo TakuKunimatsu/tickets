@@ -39,6 +39,16 @@ class PerformancesController < ApplicationController
     @schedules = @performance.schedules
   end
 
+  def destroy
+    performance = Performance.find(params[:id])
+    if performance.admin_user_id == current_admin_user.id
+      performance.destroy
+      redirect_to root_path
+    else
+      render :index
+    end
+  end
+
   def search
     @performances = Performance.search(params[:keyword])
   end
