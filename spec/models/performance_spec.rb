@@ -30,7 +30,7 @@ RSpec.describe Performance, type: :model do
       it 'start_dayが今日以降じゃないと出品できない' do
         @performance.start_day = '2020/10/01'
         @performance.valid?
-        expect(@performance.errors.full_messages).to include("Start day は今日以降のものを選択してください")
+        expect(@performance.errors.full_messages).to include('Start day は今日以降のものを選択してください')
       end
       it 'last_dayが空では出品できない' do
         @performance.last_day = ''
@@ -41,7 +41,7 @@ RSpec.describe Performance, type: :model do
         @performance.start_day = '2040/10/01'
         @performance.last_day = '2040/09/01'
         @performance.valid?
-        expect(@performance.errors.full_messages).to include("Last day は初日以降のものを選択してください")
+        expect(@performance.errors.full_messages).to include('Last day は初日以降のものを選択してください')
       end
       it 'infoが空では出品できない' do
         @performance.info = ''

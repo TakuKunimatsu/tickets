@@ -11,9 +11,9 @@ class PerformancesController < ApplicationController
 
   def create
     @performance = Performance.new(performance_params)
-    if @performance.valid? 
+    if @performance.valid?
       @performance.save
-      redirect_to root_path    
+      redirect_to root_path
     else
       render :new
     end
@@ -39,6 +39,16 @@ class PerformancesController < ApplicationController
     @schedules = @performance.schedules
   end
 
+  def destroy
+    performance = Performance.find(params[:id])
+    if performance.admin_user_id == current_admin_user.id
+      performance.destroy
+      redirect_to root_path
+    else
+      render :index
+    end
+  end
+
   def search
     @performances = Performance.search(params[:keyword])
   end
@@ -46,8 +56,7 @@ class PerformancesController < ApplicationController
   private
 
   def performance_params
-    params.require(:performance).permit(:name, :theater, :start_day, :last_day, :info, :price, :image).merge(admin_user_id: current_admin_user.id)
+    params.require(:performance).permit(:name, :theater, :start_day, :last_day, :info, :price,
+                                        :image).merge(admin_user_id: current_admin_user.id)
   end
-
-  
 end

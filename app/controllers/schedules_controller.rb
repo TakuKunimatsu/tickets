@@ -1,9 +1,5 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_admin_user!
-  
-  def new
-    @schedule = Schedule.new
-  end
 
   def create
     @schedule = Schedule.create(schedule_params)
@@ -11,7 +7,7 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    @performance = Performance.find(params[:id])
+    @performance = Performance.find(params[:performance_id])
     @schedule = Schedule.find(params[:id])
     redirect_to root_path if @performance.admin_user_id != current_admin_user.id
   end
@@ -22,6 +18,13 @@ class SchedulesController < ApplicationController
       schedule.update(schedule_params)
       redirect_to performance_path
     end
+  end
+
+  def destroy
+    @performance = Performance.find(params[:performance_id])
+    @schedule = Schedule.find(params[:id])
+    @schedule.destroy
+    redirect_to performance_path(@performance.id)
   end
 
   private

@@ -14,11 +14,11 @@
     <div class="col-xs-6 col-xs-offset-3 text-center">
     <% if admin_user_signed_in? %>
       <% if current_admin_user.id == @performance.admin_user_id %>
-        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "公演情報の編集", edit_performance_path, method: :get %></button>
-        <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "削除", method: :delete, class:"btn btn-secondary" %></button>
+        <button type="button" class= "btn btn-lg"><%= link_to "公演情報の編集", edit_performance_path, method: :get, class:"btn btn-outline-dark"  %></button>
+        <button type="button" class= "btn btn-lg"><%= link_to "公演情報の削除", performance_path, method: :delete, class:"btn btn-outline-dark" %></button>
       <% elsif user_signed_in? %> 
       
-      <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "購入画面に進む", class:"item-red-btn"%></button>
+      <button type="button" class= "btn btn-lg"><%= link_to "購入画面に進む", class:"btn btn-outline-dark"%></button>
       
       <% end %>
     <% end %>
@@ -86,7 +86,7 @@
           </tbody>
         </table>
         <div class="text-center">
-          <%= f.submit '公演を登録する', class: 'btn btn-primary' %>
+          <%= f.submit '公演を登録する', class: 'btn btn-outline-dark' %>
         </div>
       </div>
     <% end %>
@@ -105,8 +105,7 @@
             <% if current_admin_user.id == @performance.admin_user_id %>
               <%= label_tag :start_of_sales , '販売開始'%>
               <%= check_box_tag :start_of_sales, true, false  %>
-              <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "編集", edit_performance_schedule_path(@performance.id, schedule.id), method: :get %></button>
-              <button type="button" class= "btn btn-lg btn-outline-secondary"><%= link_to "削除", method: :delete, class:"btn btn-secondary" %></button>
+              <button type="button" class= "btn btn-lg"><%= link_to "編集", edit_performance_schedule_path(@performance.id,schedule.id), method: :get, class:"btn btn-outline-dark"  %></button>
             <% end %>
           <% end %>  
         </p>
