@@ -16,11 +16,9 @@
       <% if current_admin_user.id == @performance.admin_user_id %>
         <button type="button" class= "btn btn-lg"><%= link_to "公演情報の編集", edit_performance_path, method: :get, class:"btn btn-outline-dark"  %></button>
         <button type="button" class= "btn btn-lg"><%= link_to "公演情報の削除", performance_path, method: :delete, class:"btn btn-outline-dark" %></button>
-      <% elsif user_signed_in? %> 
-      
-      <button type="button" class= "btn btn-lg"><%= link_to "購入画面に進む", class:"btn btn-outline-dark"%></button>
-      
-      <% end %>
+      <% end %> 
+    <% elsif user_signed_in? %> 
+      <button type="button" class= "btn btn-lg"><%= link_to "購入画面に進む", orders_path, class:"btn btn-outline-dark"%></button>
     <% end %>
     </div>
   </div>
@@ -103,8 +101,6 @@
           <%= schedule.performance_day %>:<%= schedule.performance_time.strftime('%k:%M') %>
           <% if admin_user_signed_in? %>
             <% if current_admin_user.id == @performance.admin_user_id %>
-              <%= label_tag :start_of_sales , '販売開始'%>
-              <%= check_box_tag :start_of_sales, true, false  %>
               <button type="button" class= "btn btn-lg"><%= link_to "編集", edit_performance_schedule_path(@performance.id,schedule.id), method: :get, class:"btn btn-outline-dark"  %></button>
             <% end %>
           <% end %>  

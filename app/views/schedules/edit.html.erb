@@ -6,11 +6,15 @@
     <div class="alert alert-info" role="alert">
     販売を開始している公演回を編集、削除する場合は注意してください
     </div>
-    <%= form_with model:[@performance, @schedule],url: {controller: 'schedules', action: 'update' } do |f| %>
+    <%= form_with model:[@performance, @schedule], url: performance_schedule_path, local: true do |f| %>
     <p class="fs-4">
       <%= @schedule.performance_day %>:<%= @schedule.performance_time.strftime('%k:%M') %>
     </p>
-    <div class="col-xs-6 col-xs-offset-3"> 
+    <div class="col-xs-6 col-xs-offset-3">
+     <%= f.radio_button :start_of_sales, :true %>
+     <%= f.label :start_of_sales, "販売開始" %><br />
+     <%= f.radio_button :start_of_sales, :false %>
+     <%= f.label :checked, "販売停止" %><br />
       <table class="table">
         <thead>
           <tr>
