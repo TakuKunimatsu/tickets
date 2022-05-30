@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :authenticate_admin_user!
-  
+
   def new
     @schedule = Schedule.new
   end
