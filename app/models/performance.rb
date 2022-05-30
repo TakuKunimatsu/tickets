@@ -11,6 +11,7 @@ class Performance < ApplicationRecord
 
   has_one_attached :image
   has_many :schedules, dependent: :destroy
+  has_many :orders
   belongs_to :admin_user
 
   def date_before_start
