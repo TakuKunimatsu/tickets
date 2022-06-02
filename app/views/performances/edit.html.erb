@@ -6,7 +6,7 @@
         <h2 class="text-center">公演の情報を編集</h2>
       </div> 
      
-<%= form_with model: @performance, url: performance_path, local: true do |f| %>
+<%= form_with model: @performance, url: performance_path, id: 'new_performance',local: true do |f| %>
 
   <%= render 'shared/error_messages', model: f.object %>
   
