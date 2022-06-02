@@ -6,6 +6,8 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+require("../total_amount");
+require("../preview");
 import "bootstrap"
 import "../stylesheets/application"
 
