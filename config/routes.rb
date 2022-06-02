@@ -13,10 +13,12 @@ Rails.application.routes.draw do
 
   root to: "performances#index"
   resources :performances do
-    resources :schedules, only: [:create, :edit, :update, :destroy]
+    resources :schedules, only: [:create, :edit, :update, :destroy] do
+      resources :orders, only: [:index, :create]
+    end
     collection do
       get 'search'
     end
   end
-  resources :orders, only: [:index]
+  
 end
