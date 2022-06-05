@@ -6,12 +6,6 @@ textarea{
   width: 60vh;
 }
 
-.preview{
-  height:60vh;
-  width:45vh;
-}
-
-.preview-image{
-  height:100%;
-  width:100%;
+.click-upload{
+  display: flex;
 }

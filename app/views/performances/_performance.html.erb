@@ -1,6 +1,6 @@
         <div class="col">
           <div class="card shadow-sm">  
-            <%= link_to performance_path(performance.id) do %><%= image_tag performance.image, class:"img-fluid"%><% end %>
+            <%= link_to performance_path(performance.id) do %><%= image_tag performance.images[0], class:"img-fluid"%><% end %>
             <div class="card-body">
               <p class="card-text">団体名：<%= performance.admin_user.company_name %></p>
               <p class="card-text">公演名：<%= performance.name %></p>

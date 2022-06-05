@@ -8,6 +8,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("../total_amount");
 require("../preview");
+require("../card")
 import "bootstrap"
 import "../stylesheets/application"
 
