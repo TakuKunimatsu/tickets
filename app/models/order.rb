@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  
   validates :buy_count,         presence: true
 
   belongs_to :performance
