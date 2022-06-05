@@ -5,3 +5,7 @@ textarea{
   min-height: 60vh;
   width: 60vh;
 }
+
+.click-upload{
+  display: flex;
+}

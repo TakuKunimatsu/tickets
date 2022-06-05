@@ -13,11 +13,10 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    Schedule.transaction do
-      schedule = Schedule.lock.find(params[:id])
-      schedule.update(schedule_params)
-      redirect_to performance_path
-    end
+    @performance = Performance.find(params[:performance_id])
+    schedule = Schedule.lock.find(params[:id])
+    schedule.update(schedule_params)
+    redirect_to performance_path(@performance.id)
   end
 
   def destroy
@@ -32,6 +31,6 @@ class SchedulesController < ApplicationController
   def schedule_params
     params
       .require(:schedule)
-      .permit(:performance_day, :performance_time, :stock).merge(performance_id: params[:performance_id])
+      .permit(:start_of_sales, :performance_day, :performance_time, :stock).merge(performance_id: params[:performance_id])
   end
 end

@@ -5,12 +5,13 @@ class Performance < ApplicationRecord
   validates :last_day,        presence: true
   validates :info,            presence: true
   validates :price,           presence: true, numericality: { only_integer: true }
-  validates :image, presence: true
+  validates :images, presence: true
   validate :date_before_start
   validate :date_before_last
 
-  has_one_attached :image
+  has_many_attached :images
   has_many :schedules, dependent: :destroy
+  has_many :orders
   belongs_to :admin_user
 
   def date_before_start

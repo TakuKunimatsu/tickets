@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_15_013742) do
+ActiveRecord::Schema.define(version: 2022_05_30_092046) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(version: 2022_05_15_013742) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "buy_count", null: false
+    t.bigint "performance_id", null: false
+    t.bigint "schedule_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["performance_id"], name: "index_orders_on_performance_id"
+    t.index ["schedule_id"], name: "index_orders_on_schedule_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "performances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "theater", null: false
@@ -60,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_05_15_013742) do
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.boolean "start_of_sales", default: false, null: false
     t.date "performance_day", null: false
     t.time "performance_time", null: false
     t.integer "stock", null: false
@@ -83,6 +96,9 @@ ActiveRecord::Schema.define(version: 2022_05_15_013742) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders", "performances"
+  add_foreign_key "orders", "schedules"
+  add_foreign_key "orders", "users"
   add_foreign_key "performances", "admin_users"
   add_foreign_key "schedules", "performances"
 end
