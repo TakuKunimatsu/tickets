@@ -9,7 +9,7 @@
 
  # URL
 
- 現在実装中の機能が終わり次第記入予定。
+ https://tickets-0111.herokuapp.com/
 
 # テスト用アカウント
 ・Basic認証パスワード: 1564<br>
